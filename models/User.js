@@ -18,7 +18,12 @@ const userSchema = new Schema({
     trim: true,
     minLength: 3,
     required: true
-  }
+  },
+
+  blogposts: [{ type: Schema.Types.ObjectId, ref: "blogpost" }],
+  comments: [{ type: Schema.Types.ObjectId, ref: "comment" }],
+  likes: [{ type: Schema.Types.ObjectId, ref: "blogpost" }],
+  shares: [{ type: Schema.Types.ObjectId, ref: "blogpost" }],
 }, {
   timestamps: true,
   toJSON: {
@@ -37,3 +42,20 @@ userSchema.pre('save', async function(next) {
 });
 
 module.exports = mongoose.model('User', userSchema);
+
+
+// const { Schema } = require("mongoose")
+// const mongoose = require("mongoose")
+
+// const userSchema = new Schema({
+//   name: { type: String, required: true, unique: true },
+//   email: { type: String, required: false, unique: false },
+//   password: { type: String, required: true },
+//   likes: [{ type: Schema.Types.ObjectId, ref: "posts" }],
+//   comments: [{ type: Schema.Types.ObjectId, ref: "comments" }],
+//   posts: [{ type: Schema.Types.ObjectId, ref: "posts" }],
+// });
+
+// const user = mongoose.model('user', userSchema)
+
+// module.exports = user
